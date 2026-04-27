@@ -52,11 +52,12 @@ export default function SettingsPage() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        const provider = (parsed.provider as Provider) || 'zhipu';
         setConfig({
-          provider: parsed.provider || 'zhipu',
+          provider,
           apiKey: parsed.apiKey || '',
-          baseUrl: parsed.baseUrl || providerInfo[parsed.provider]?.defaultUrl || '',
-          model: parsed.model || providerInfo[parsed.provider]?.defaultModel || '',
+          baseUrl: parsed.baseUrl || providerInfo[provider]?.defaultUrl || '',
+          model: parsed.model || providerInfo[provider]?.defaultModel || '',
         });
       } catch {
         // ignore
